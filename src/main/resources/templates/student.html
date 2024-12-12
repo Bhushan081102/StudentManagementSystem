@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <!-- Bootstrap 4 CSS for navbar styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Content Container */
+        #content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Student Management System</a>
+
+        <!-- Toggler/collapsible Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{student/new}">Add Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{student/edit/{id}}">Update Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{students/delete}">Delete Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{students}">Student List</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div id="content">
+        <!-- Student List Section -->
+        <div id="studentList" class="section">
+            <h1>Student List</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through the students and display each one -->
+                    <tr th:each="student : ${students}">
+                        <td th:text="${student.firstname}"></td>
+                        <td th:text="${student.lastname}"></td>
+                        <td th:text="${student.email}"></td>
+                        <td> <a th:href="@{student/edit/{id} (id=${student.id})} "class="btn btn-info">Update</a>
+                        <a th:href="@{student/{id}(id=${student.id})}"class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and jQuery for responsive navbar -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
